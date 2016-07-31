@@ -13,26 +13,28 @@ These packages are used to simulate the flying robot Ardrone in ROS environment 
 
 Some packages are based on the tu-darmstadt-ros-pkg by Stefan Kohlbrecher, TU Darmstadt.
 
+This package depends on ardrone_autonomy package and gazebo7 so install these first.
+
 How to install the simulator:
 
-1. Create a workspace for the simulator
+1. Install gazebo7 and ardrone_autonomy package
+
+2. Create a workspace for the simulator
 
     ```
-    mkdir -p ~/tum_simulator_ws/src
-    cd  ~/tum_simulator_ws/src
+    mkdir -p ~/ardrone_simulator/src
+    cd  ~/ardrone_simulator/src
     catkin_init_workspace
     ```
-2. Download dependencies
+2. Download package
 
     ```
-    git clone https://github.com/AutonomyLab/ardrone_autonomy.git	# The AR.Drone ROS driver
-    git clone https://github.com/iolyp/tum-simulator-indigo.git
-    cd ..
-    rosdep install --from-paths src --ignore-src --rosdistro indigo -y
+    git clone https://github.com/iolyp/ardrone_simulator_gazebo7
     ```
 3. Build the simulator
 
     ```
+    cd ..
     catkin_make
     ```
 4. Source the environment
@@ -46,4 +48,14 @@ How to run a simulation:
 
     ```
     roslaunch cvg_sim_gazebo ardrone_testworld.launch
+    ```
+
+How to run a simulation using ar_track_alvar tags:
+
+1. Move the contents of  ~/ardrone_simulator/src/cvg_sim_gazebo/meshes/ar_track_alvar_tags/ to  ~/.gazebo/models
+
+2. Run simulation
+
+    ```
+    roslaunch cvg_sim_gazebo ar_tag.launch
     ```
